@@ -15,7 +15,7 @@ async function postDetails({ postId }) {
           borderRadius: "5px",
           padding: "10px",
           marginTop: "10px",
-          width: "650px",
+          width: "95%",
           backgroundColor: "#cecbda",
         }}
         key={posts.id}
