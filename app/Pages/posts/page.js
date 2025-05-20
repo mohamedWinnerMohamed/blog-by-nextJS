@@ -1,24 +1,24 @@
-
-import next from 'next';
-import Todo from '../../components/todo';
-import Link from 'next/link';
+import next from "next";
+import Todo from "../../components/todo";
+import Link from "next/link";
 export const metadata = {
   title: "Posts",
   description: "Posts Page",
 };
 
 export default async function PostsPage() {
-
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts",{ next: { revalidate: 120 } });
-  const posts = await response.json()
-  console.log(posts)
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+    next: { revalidate: 120 },
+  });
+  const posts = await response.json();
+  console.log(posts);
   const capitalizeFirstLetter = (str) => {
     if (!str) return str;
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
   const postsJSX = posts.map((post) => {
     return (
-      <Link href={`/Pages/posts/${post.id}`}>
+      <Link href={`/Pages/posts/${post.id}`} key={post.id}>
         <div
           style={{
             border: "1px solid black",
@@ -26,10 +26,9 @@ export default async function PostsPage() {
             borderRadius: "5px",
             padding: "10px",
             margin: "10px",
-            width: "650px",
+            width: "100%",
             backgroundColor: "#cecbda",
           }}
-          key={post.id}
         >
           <h2
             style={{
@@ -42,8 +41,8 @@ export default async function PostsPage() {
           <p style={{ color: "#30333c" }}>{post.body}</p>
         </div>
       </Link>
-    );  
-  })
+    );
+  });
   return (
     <div
       style={{
@@ -54,8 +53,8 @@ export default async function PostsPage() {
         height: "100%",
       }}
     >
-      <h1 style={{color: "#0d1b46"}} >Posts Page</h1>
-      <div>{postsJSX}</div>
+      <h1 style={{ color: "#0d1b46" }}>Posts Page</h1>
+      <div style={{ width: "80%" }}>{postsJSX}</div>
     </div>
   );
 }
